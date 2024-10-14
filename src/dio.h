@@ -20,3 +20,8 @@
 
 #define LOW 0
 #define HIGH 1
+
+// function declarations
+void Set_PIN_Direction(volatile uint8_t* ddr, uint8_t pin, uint8_t value)
+void Set_PIN_State(volatile uint8_t* port, uint8_t pin, uint8_t value)
+void dio_init(void)
