@@ -1,6 +1,5 @@
 #include <avr/io.h>
 #include "dio.h"
-#include "main.h"
 
 void dio_init(void) {
   Set_PIN_Direction(&DDRD, PIN_Segment_A, DIO_OUTPUT);
@@ -18,14 +17,15 @@ void dio_init(void) {
 }
 
 void Set_PIN_Direction(volatile uint8_t* ddr, uint8_t pin, uint8_t value) {
-  if (value == INPUT) {
-      *ddr |= (1 << pin);
-  } 
-  else if (value == OUTPUT) {
+  if (value == DIO_INPUT) {
       *ddr &= ~(1 << pin);
-  }
-  else if (value == INPUT_PULLUP) {
+  } 
+  else if (value == DIO_OUTPUT) {
       *ddr |= (1 << pin);
+  }
+  else if (value == DIO_INPUT_PULLUP) {
+      *ddr &= ~(1 << pin);
+      PORTB |= (1 << pin);
   }
 }
 
@@ -37,12 +37,3 @@ void Set_PIN_State(volatile uint8_t* port, uint8_t pin, uint8_t value) {
         *port &= ~(1 << pin);
     }
 }
-
-
-inline void Register_ToggleBit(volatile unsigned char* Register, unsigned char Bit){
-  *Register = *Register ^ (1 << Bit);
-}
-
-inline unsigned char Register_GetBit(volatile unsigned char* Register, unsigned char Bit){
-  return (*Register >> Bit) & (unsigned char)0x01;
-} 
