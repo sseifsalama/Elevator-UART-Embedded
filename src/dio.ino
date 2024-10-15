@@ -2,38 +2,39 @@
 #include "dio.h"
 
 void dio_init(void) {
-  Set_PIN_Direction(&DDRD, PIN_Segment_A, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRD, PIN_Segment_B, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRD, PIN_Segment_C, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRD, PIN_Segment_D, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRD, PIN_Segment_E, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRD, PIN_Segment_F, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRD, PIN_Segment_G, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRB, PIN_Button_0, DIO_INPUT);
-  Set_PIN_Direction(&DDRB, PIN_Button_1, DIO_INPUT_PULLUP);
-  Set_PIN_Direction(&DDRB, PIN_Emergency_Button, DIO_INPUT_PULLUP);
-  Set_PIN_Direction(&DDRB, PIN_Buzzer, DIO_OUTPUT);
-  Set_PIN_Direction(&DDRB, PIN_Red_LED, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Segment_A, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Segment_B, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Segment_C, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Segment_D, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Segment_E, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Segment_F, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Segment_G, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRD, PIN_Dot, DIO_OUTPUT);
+  
+    Set_PIN_Direction(&DDRB, PIN_Button_1, DIO_INPUT);
+    Set_PIN_Direction(&DDRB, PIN_Button_0, DIO_INPUT);
+    Set_PIN_Direction(&DDRB, PIN_Emergency_Button, DIO_INPUT);
+
+    Set_PIN_Direction(&DDRB, PIN_Red_LED, DIO_OUTPUT);
+    Set_PIN_Direction(&DDRB, PIN_Buzzer, DIO_OUTPUT);
 }
 
-void Set_PIN_Direction(volatile uint8_t* ddr, uint8_t pin, uint8_t value) {
-  if (value == DIO_INPUT) {
-      *ddr &= ~(1 << pin);
-  } 
-  else if (value == DIO_OUTPUT) {
-      *ddr |= (1 << pin);
-  }
-  else if (value == DIO_INPUT_PULLUP) {
-      *ddr &= ~(1 << pin);
-      PORTB |= (1 << pin);
-  }
+void Set_PIN_Direction(volatile uint8_t* ddr, uint8_t pin, uint8_t direction) {
+    if (pin >= 8) return; // Invalid pin
+    else if (direction == DIO_INPUT) {
+        *ddr &= ~(1 << pin); 
+    } 
+    else if (direction == DIO_OUTPUT) {
+        *ddr |= (1 << pin);
+    }
 }
 
-void Set_PIN_State(volatile uint8_t* port, uint8_t pin, uint8_t value) {
-    if (value == HIGH) {
+void Set_PIN_State(volatile uint8_t* port, uint8_t pin, uint8_t state) {
+    if (pin >= 8) return; // Invalid pin
+    else if (state == HIGH) {
         *port |= (1 << pin);
     } 
-    else if (value == LOW) {
+    else if (state == LOW) {
         *port &= ~(1 << pin);
     }
 }
