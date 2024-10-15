@@ -1,3 +1,7 @@
+// Include Guard to avoid multiple inclusion
+#ifndef _dio_ 
+#define _dio_
+
 // PORTD for 7 Segment
 #define PIN_Segment_A 0
 #define PIN_Segment_B 1
@@ -25,3 +29,4 @@
 void Set_PIN_Direction(volatile uint8_t* ddr, uint8_t pin, uint8_t direction);
 void Set_PIN_State(volatile uint8_t* port, uint8_t pin, uint8_t state);
 void dio_init(void);
+#endif
