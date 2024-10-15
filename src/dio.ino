@@ -17,6 +17,19 @@ void dio_init(void) {
 
     Set_PIN_Direction(&DDRB, PIN_Red_LED, DIO_OUTPUT);
     Set_PIN_Direction(&DDRB, PIN_Buzzer, DIO_OUTPUT);
+
+    // Set all pins to HIGH to ensure proper operation
+    for (uint8_t i = PIN_Segment_A; i <= PIN_Dot; i++) {
+        Set_PIN_State(&PORTD, i, HIGH);
+    }
+    Set_PIN_State(&PORTB, PIN_Red_LED, HIGH);
+    _delay_ms(1000);
+
+    // Set all pins to LOW to ensure proper operation
+    Set_PIN_State(&PORTB, PIN_Red_LED, LOW);
+    for (uint8_t i = PIN_Segment_A; i <= PIN_Dot; i++) {
+        Set_PIN_State(&PORTD, i, LOW);
+    }
 }
 
 void Set_PIN_Direction(volatile uint8_t* ddr, uint8_t pin, uint8_t direction) {
