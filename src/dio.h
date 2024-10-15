@@ -3,14 +3,12 @@
 #define _dio_
 
 // PORTD for 7 Segment
-#define PIN_Segment_A 0
-#define PIN_Segment_B 1
-#define PIN_Segment_C 2
-#define PIN_Segment_D 3
-#define PIN_Segment_E 4
-#define PIN_Segment_F 5
-#define PIN_Segment_G 6
-#define PIN_Dot 7
+#define PIN_Segment_A 2
+#define PIN_Segment_B 3
+#define PIN_Segment_C 4
+#define PIN_Segment_D 5
+#define PIN_Segment_E 6
+#define PIN_Segment_F 7
 
 // PORTB for Other
 #define PIN_Button_0 0

@@ -8,8 +8,6 @@ void dio_init(void) {
     Set_PIN_Direction(&DDRD, PIN_Segment_D, DIO_OUTPUT);
     Set_PIN_Direction(&DDRD, PIN_Segment_E, DIO_OUTPUT);
     Set_PIN_Direction(&DDRD, PIN_Segment_F, DIO_OUTPUT);
-    Set_PIN_Direction(&DDRD, PIN_Segment_G, DIO_OUTPUT);
-    Set_PIN_Direction(&DDRD, PIN_Dot, DIO_OUTPUT);
   
     Set_PIN_Direction(&DDRB, PIN_Button_1, DIO_INPUT);
     Set_PIN_Direction(&DDRB, PIN_Button_0, DIO_INPUT);
@@ -19,7 +17,7 @@ void dio_init(void) {
     Set_PIN_Direction(&DDRB, PIN_Buzzer, DIO_OUTPUT);
 
     // Set all pins to HIGH to ensure proper operation
-    for (uint8_t i = PIN_Segment_A; i <= PIN_Dot; i++) {
+    for (uint8_t i = PIN_Segment_A; i <= PIN_Segment_F; i++) {
         Set_PIN_State(&PORTD, i, HIGH);
     }
     Set_PIN_State(&PORTB, PIN_Red_LED, HIGH);
@@ -27,7 +25,7 @@ void dio_init(void) {
 
     // Set all pins to LOW to ensure proper operation
     Set_PIN_State(&PORTB, PIN_Red_LED, LOW);
-    for (uint8_t i = PIN_Segment_A; i <= PIN_Dot; i++) {
+    for (uint8_t i = PIN_Segment_A; i <= PIN_Segment_F; i++) {
         Set_PIN_State(&PORTD, i, LOW);
     }
 }
