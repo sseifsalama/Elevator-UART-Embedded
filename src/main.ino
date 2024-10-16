@@ -42,16 +42,6 @@ int main(void) {
                 Set_PIN_State(&PORTB, PIN_Red_LED, LOW);   // Turn off Red LED
                 UART_SendString("Command: Red LED OFF\n");
             }
-            // Command to turn Buzzer ON
-            else if (strcmp(receivedCommand, "buzzer_on") == 0) {
-                Set_PIN_State(&PORTB, PIN_Buzzer, HIGH);   // Turn on Buzzer
-                UART_SendString("Command: Buzzer ON\n");
-            }
-            // Command to turn Buzzer OFF
-            else if (strcmp(receivedCommand, "buzzer_off") == 0) {
-                Set_PIN_State(&PORTB, PIN_Buzzer, LOW);
-                UART_SendString("Command: Buzzer OFF\n");
-            }
             // Command to turn on 7 Segment Digit 0
             else if (strcmp(receivedCommand, "7Segment_0") == 0) {
               for (uint8_t i = PIN_Segment_A; i <= PIN_Segment_F; i++) {

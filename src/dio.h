@@ -14,8 +14,7 @@
 #define PIN_Button_0 0
 #define PIN_Button_1 1
 #define PIN_Red_LED 2
-#define PIN_Buzzer 3
-#define PIN_Emergency_Button 4
+#define PIN_Emergency_Button 3
 
 #define DIO_INPUT 0
 #define DIO_OUTPUT 1

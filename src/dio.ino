@@ -14,7 +14,6 @@ void dio_init(void) {
     Set_PIN_Direction(&DDRB, PIN_Emergency_Button, DIO_INPUT);
 
     Set_PIN_Direction(&DDRB, PIN_Red_LED, DIO_OUTPUT);
-    Set_PIN_Direction(&DDRB, PIN_Buzzer, DIO_OUTPUT);
 
     // Set all pins to HIGH to ensure proper operation
     for (uint8_t i = PIN_Segment_A; i <= PIN_Segment_F; i++) {
