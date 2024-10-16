@@ -1,4 +1,5 @@
 #include <avr/io.h>
+#include <avr/interrupt.h>
 #include "uart.h"
 
 void UART_SetBaudRate(uint32_t baud_rate){
@@ -11,6 +12,7 @@ void UART_Init(uint32_t baud_rate){
   UART_SetBaudRate(baud_rate);
   UCSR0B |= (1 << RXEN0) | (1 << TXEN0); // Enable uart tx and rx
   UCSR0C |= (1 << UCSZ01) | (1 << UCSZ00); // Set to 8-bit mode
+  UCSR0B |= (1 << RXCIE0); // Enable rx interrupt
 }
 
 void UART_SendChar(unsigned char data){
@@ -44,4 +46,20 @@ void UART_ReceiveString(char* buffer, uint16_t bufferSize) {
         buffer[i++] = receivedChar; // Store received character in buffer
     }
     buffer[i] = '\0'; // Add null terminator to end of string
+}
+
+// UART RX interrupt
+ISR(USART_RX_vect) {
+    char receivedChar = UDR0;  // Read recieved charachter
+
+    // Store received character in buffer
+    if (commandIndex < BUFFER_SIZE - 1) {
+        receivedCommand[commandIndex++] = receivedChar;
+    }
+
+    // Check if the received character is the end of a command ('\n' or '\0')
+    if (receivedChar == '\n' || receivedChar == '\0') {
+        receivedCommand[commandIndex - 1] = '\0';  // Null-terminate string
+        rx_flag = 1;  // Indicate that a complete command has been received
+    }
 }
