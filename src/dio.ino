@@ -28,6 +28,11 @@ void dio_init(void) {
     for (uint8_t i = PIN_Segment_A; i <= PIN_Segment_F; i++) {
         Set_PIN_State(&PORTD, i, LOW);
     }
+
+    // Display 0 on 7 Segment
+    for (uint8_t i = PIN_Segment_A; i <= PIN_Segment_F; i++) {
+        Set_PIN_State(&PORTD, i, HIGH);
+    }
 }
 
 void Set_PIN_Direction(volatile uint8_t* ddr, uint8_t pin, uint8_t direction) {
